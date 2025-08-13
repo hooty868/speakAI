@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "packageManager": "pnpm@9.6.0",
   "scripts": {
+    "preinstall": "node scripts/check-node-version.mjs",
     "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start -p 3000"
@@ -24,6 +25,6 @@
     "typescript": "^5.4.5"
   },
   "engines": {
-    "node": ">=18.17.0"
+    "node": ">=18.17.0 <21"
   }
 }
