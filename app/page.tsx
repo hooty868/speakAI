@@ -20,8 +20,9 @@ export default function Page() {
 	const [isLoading, setIsLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 	const audioRef = useRef<HTMLAudioElement | null>(null)
+	const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-	async function handleSpeak() {
+	async function speak() {
 		if (!text.trim()) {
 			setError('請先輸入文字')
 			return
@@ -52,6 +53,15 @@ export default function Page() {
 		}
 	}
 
+	function handleSpeak() {
+		if (debounceRef.current) {
+			clearTimeout(debounceRef.current)
+		}
+		debounceRef.current = setTimeout(() => {
+			void speak()
+		}, 400)
+	}
+
 	return (
 		<div className="bg-[var(--background-color)] text-[var(--text-primary)]">
 			<div className="flex flex-col min-h-screen justify-between mx-auto max-w-md bg-white">
@@ -69,7 +79,7 @@ export default function Page() {
 					<div className="w-full text-center">
 						<label htmlFor="voice-input" className="text-base text-[var(--text-secondary)] transition-all duration-300">Say something...</label>
 						<div className="relative mt-2">
-							<input id="voice-input" className="input-premium text-center" type="text" placeholder="" value={text} onChange={(e) => setText(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') handleSpeak() }} />
+							<textarea id="voice-input" className="input-premium text-left resize-y min-h-[120px]" placeholder="" value={text} onChange={(e) => setText(e.target.value)} rows={4} />
 							<div className="input-underline absolute bottom-0 left-0 w-full h-0.5 bg-[var(--primary-color)]" />
 						</div>
 

@@ -20,7 +20,7 @@ export async function POST(request: Request) {
 		const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 		const speech = await openai.audio.speech.create({
-			model: 'gpt-4o-mini-tts',
+			model: 'tts-1-hd',
 			voice: selectedVoice,
 			input: text,
 		})
