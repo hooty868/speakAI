@@ -2,30 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	--primary-color: #000000;
-	--secondary-color: #F3F4F6;
-	--background-color: #FFFFFF;
-	--text-primary: #000000;
-	--text-secondary: #6B7280;
-	--accent-color: #E5E7EB;
+@layer base {
+  body {
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+      Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
 }
 
-body {
-	font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	min-height: max(884px, 100dvh);
-}
+@layer components {
+  .input {
+    @apply w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 text-sm text-gray-900 dark:text-gray-100 outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-1 focus:ring-blue-500 dark:focus:ring-blue-400;
+  }
 
-.input-premium {
-	@apply bg-transparent border-0 border-b-2 border-[var(--accent-color)] w-full py-3 px-1 text-lg placeholder:text-[var(--text-secondary)] focus:outline-none focus:ring-0 focus:border-[var(--primary-color)] transition-all duration-500 ease-in-out;
-}
+  .btn {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700;
+  }
 
-.input-underline {
-	transform: scaleX(0);
-	transform-origin: center;
-	transition: transform 500ms ease-in-out;
-}
+  .btn-primary {
+    @apply bg-blue-600 dark:bg-blue-500 text-white border-blue-600 dark:border-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800;
+  }
 
-.input-premium:focus + .input-underline {
-	transform: scaleX(1);
-} 
+  .btn-secondary {
+    @apply bg-transparent text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700;
+  }
+
+  .card {
+    @apply rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-sm;
+  }
+
+  .step-badge {
+    @apply inline-flex items-center gap-2 rounded-full border border-gray-300 dark:border-gray-600 px-3 py-1 text-xs text-gray-600 dark:text-gray-400;
+  }
+
+  .step-badge-completed {
+    @apply border-green-500 text-green-600 dark:text-green-400;
+  }
+}
